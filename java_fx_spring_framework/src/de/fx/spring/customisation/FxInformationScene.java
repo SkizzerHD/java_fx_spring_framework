@@ -70,9 +70,9 @@ public class FxInformationScene{
 		for(Node c : components ) {
 			height = height+c.getScaleY();
 		}
-		height = height*50;
-		if(height < 50) {
-			height = 50;
+		height = height*80;
+		if(height < 80) {
+			height = 80;
 		}
 		return height;
 	}
