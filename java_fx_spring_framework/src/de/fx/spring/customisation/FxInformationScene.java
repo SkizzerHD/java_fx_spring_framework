@@ -17,7 +17,7 @@ public class FxInformationScene extends FxControlStylingService{
 	private StackPane root;
 	private InfoType type;
 	private Node[] components;
-	private Button b;
+	private Button button;
 
 	public FxInformationScene(InfoType type,Node ...components ) {
 		this.type = type;
@@ -27,7 +27,9 @@ public class FxInformationScene extends FxControlStylingService{
 
 	private void showScene() {
 		stage = new Stage();
-		stage.setTitle(type.toString());
+		if(type != null) {
+			stage.setTitle(type.toString());	
+		}
 		root = new StackPane();
 		Scene scene = new Scene(root,calculateWidht(components),calculateHeigth(components));
 
@@ -40,7 +42,9 @@ public class FxInformationScene extends FxControlStylingService{
 		HBox hBox = new HBox();
 		hBox.setAlignment(Pos.CENTER);
 		hBox.setSpacing(10);	
-		hBox.getChildren().add(getImageView());
+		if(type != null) {
+			hBox.getChildren().add(getImageView());
+		}
 
 		VBox vBox = new VBox();
 		vBox.setAlignment(Pos.CENTER);
@@ -50,16 +54,15 @@ public class FxInformationScene extends FxControlStylingService{
 			vBox.getChildren().addAll(components[i]);
 		}
 
-		b = new Button("OK");
-		b.setStyle("-fx-background-color: #FFFAF0; -fx-font-weight:bold;-fx-border-color:black");
-		b.setOnMouseEntered(e ->{hovering(e);});
-		b.setOnMouseExited(e ->{ hoveringEnded(e); });
-		b.setOnAction(e->{stage.close();});
-
+		button = new Button("OK");
+		button.setStyle("-fx-background-color: #FFFAF0; -fx-font-weight:bold;-fx-border-color:black;-fx-scale-x:1.5");
+		button.setOnMouseEntered(e ->{hovering(e);});
+		button.setOnMouseExited(e ->{ hoveringEnded(e); });
+		button.setOnAction(e->{stage.close();});
 
 		hBox.getChildren().add(vBox);
 		mainBox.getChildren().add(hBox);
-		mainBox.getChildren().add(b);
+		mainBox.getChildren().add(button);
 		root.getChildren().add(mainBox);
 		stage.setScene(scene);
 		stage.show();
@@ -71,11 +74,10 @@ public class FxInformationScene extends FxControlStylingService{
 			if(c.getScaleX() > width) {
 				width = c.getScaleX();
 			}
-
 		}
 		width = width*200;
-		if(width < 250) {
-			width = 250;
+		if(width < 270) {
+			width = 270;
 		}
 		return width;
 	}
@@ -85,7 +87,12 @@ public class FxInformationScene extends FxControlStylingService{
 		for(Node c : components ) {
 			height = height+c.getScaleY();
 		}
-		height = height*100;
+		if(components.length>1) {
+			height = height*50;
+		}else {
+			height = height*100;	
+		}
+		
 		if(height < 100) {
 			height = 100;
 		}
@@ -113,9 +120,8 @@ public class FxInformationScene extends FxControlStylingService{
 
 	@Override
 	public void setHoveringStyle() {
-		setControlObject(b);
+		setControlObject(button);
 		setStyle(";-fx-background-color:white");
-		
 	}
 
 	@Override
@@ -123,4 +129,10 @@ public class FxInformationScene extends FxControlStylingService{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public Button getButton() {
+		return button;
+	}
+	
+	
 }
