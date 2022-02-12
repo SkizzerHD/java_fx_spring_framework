@@ -8,6 +8,7 @@ import de.fx.spring.exception.NoTranslationPossibleException;
 import de.fx.spring.exception.NoTranslationValueFoundException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Control;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 
 /**
@@ -45,6 +46,9 @@ public class FXRManager {
 						}else if(c.getClass().isAssignableFrom(Button.class)) {
 							Button b = (Button)c;
 							b.setText(translationMap.get(key));
+						}else if(c.getClass().isAssignableFrom(Hyperlink.class)) {
+							Hyperlink h = (Hyperlink) c;
+							h.setText(translationMap.get(key));
 						}else {
 							throwNoTranslationPossible(componentClass, c);
 						}
@@ -90,14 +94,14 @@ public class FXRManager {
 		return true;
 	}
 
-	private static <T> void throwNoTranslationValueFound(Class<T>controlClass,Control c) 
+	private static <T> void throwNoTranslationValueFound(Class<T> componentClass,Control c) 
 			throws NoTranslationValueFoundException {
-		throw new NoTranslationValueFoundException(controlClass,c);
+		throw new NoTranslationValueFoundException(componentClass,c);
 	}
 
-	private static <T>void throwNoTranslationPossible(Class<T>controlClass,Control c) 
+	private static <T>void throwNoTranslationPossible(Class<T> componentClass,Control c) 
 			throws NoTranslationPossibleException{
-		throw new NoTranslationPossibleException(controlClass, c);
+		throw new NoTranslationPossibleException(componentClass, c);
 
 	}
 }

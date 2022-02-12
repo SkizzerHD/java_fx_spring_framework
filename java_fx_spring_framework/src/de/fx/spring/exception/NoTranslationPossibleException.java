@@ -9,8 +9,8 @@ public class NoTranslationPossibleException extends Exception{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public <T> NoTranslationPossibleException(Class<T>controlClass, Control control) {
-		super("No translation possible for '"+controlClass.getSimpleName()+"."+control.getId()+"'\n\t translation only"
+	public <T> NoTranslationPossibleException(Class<T> componentClass, Control c) {
+		super("No translation possible for '"+componentClass.getSimpleName()+"."+c.getId()+"'\n\t translation only"
 				+ "possible for labels and buttons ");
 		
 	}
