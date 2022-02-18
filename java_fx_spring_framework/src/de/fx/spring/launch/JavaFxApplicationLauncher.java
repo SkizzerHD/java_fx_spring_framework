@@ -1,6 +1,4 @@
 package de.fx.spring.launch;
-
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +18,7 @@ import javafx.application.Application;
 public class JavaFxApplicationLauncher {
 	/**
 	 * 
+	 * @param <T>
 	 * @param configClass
 	 * @param args
 	 * Needs a configClass which extends the Application class from JavaFx
@@ -27,14 +26,15 @@ public class JavaFxApplicationLauncher {
 	 * @throws NoScourceClassFoundException 
 	 * @throws NoSourceControllerClassFoundException 
 	 */
-	public static void launch(Class<? extends Application> configClass,String[] args) 
+	public static <T> void launch(Class<?>sourceClass,Class<?>sourceControllerClass,String[] args) 
 			throws NoSourceClassFoundException, NoSourceControllerClassFoundException  {
-		if(ApplicationConfiguration.getSourceClass() == null) {
+		if(sourceClass== null) {
 			throw new NoSourceClassFoundException();
-		}else if(ApplicationConfiguration.getSourceController() == null) {
+		}else if(sourceControllerClass == null) {
 			throw new NoSourceControllerClassFoundException();
 		}else {
-			Application.launch(configClass,args);	
+			ApplicationConfiguration.setScourceClasses(sourceClass,sourceControllerClass);
+			Application.launch(ApplicationConfiguration.class,args);	
 		}
 	}
 
@@ -42,13 +42,4 @@ public class JavaFxApplicationLauncher {
 	public FxSceneMover getFxSceneMover() {
 		return new FxSceneMoverService();
 	}
-	
-	public static <T> void setSourceClass(Class<T>scourceClass) {
-		ApplicationConfiguration.setScourceClass(scourceClass); 
-	}
-	
-	public static <T> void setSourceController(Class<T>sourceController) {
-		ApplicationConfiguration.setSourceController(sourceController);
-	}
-
 }

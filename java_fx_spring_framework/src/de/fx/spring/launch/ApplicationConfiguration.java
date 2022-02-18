@@ -46,23 +46,9 @@ public class ApplicationConfiguration extends Application {
 		stage.show();
 	}
 	
-	public <T>Class<T> getSourceClass(Class<T>scourceClass){
-		return scourceClass;
-	}
 	
-	public static <T> void setScourceClass(Class<T>scourceClass) {
-		sourceClass = scourceClass;
-	}
-	
-	public static <T> void setSourceController(Class<T>sourceControllerClass) {
-		sourceController =  sourceControllerClass;
-	}
-
-	public static Class<?> getSourceClass() {
-		return sourceClass;
-	}
-
-	public static Class<?> getSourceController() {
-		return sourceController;
+	public static <T> void setScourceClasses(Class<?> sourceClass2, Class<?> sourceControllerClass) {
+		sourceClass = sourceClass2;
+		sourceController = sourceControllerClass;
 	}
 }
