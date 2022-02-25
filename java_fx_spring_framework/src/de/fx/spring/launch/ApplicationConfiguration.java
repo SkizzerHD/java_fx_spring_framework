@@ -1,5 +1,4 @@
 package de.fx.spring.launch;
-
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import javafx.application.Application;
@@ -14,6 +13,7 @@ import net.rgielen.fxweaver.core.FxWeaver;
  * @author David Baumer
  *
  */
+
 public class ApplicationConfiguration extends Application {
 	
 	private ConfigurableApplicationContext applicationContext;
@@ -22,11 +22,10 @@ public class ApplicationConfiguration extends Application {
 	
 	private static Class<?> sourceController;
 	
-
 	@Override
 	public void init() {
 		String[] args = getParameters().getRaw().toArray(new String[0]);
-		this.applicationContext = new SpringApplicationBuilder()
+		applicationContext = new SpringApplicationBuilder()
 				.sources(sourceClass)
 				.run(args);
 	}
@@ -51,4 +50,5 @@ public class ApplicationConfiguration extends Application {
 		sourceClass = sourceClass2;
 		sourceController = sourceControllerClass;
 	}
+	
 }
